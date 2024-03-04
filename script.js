@@ -1,6 +1,13 @@
 "use strict";
 import getCar from "./getCar.js";
-getCar();
+let yearForm = document.getElementById("year");
+yearForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let input = document.getElementById("input").value;
+    getCar(input);
+});
+
 // პატარა ხარვეზია აქ, რომ იმუშავოს ტექსტის გარშემო უნდა დააწვეთ, ტექსტს რომ დააწვეთ არ მუშაობს
 document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
@@ -15,37 +22,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
     const mySlider = new SliderPro("#my-slider", {
-        width: "800px",
-        height: "500px",
+        width: "70vw",
+        height: "35vw",
         autoplay: true,
         responsive: true,
         arrows: true,
     });
 });
 
-let mybutton = document.getElementById("myBtn");
-
-window.onscroll = function () {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
-    ) {
-        mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
+document.addEventListener("DOMContentLoaded", () => {
+    let mybutton = document.getElementById("myBtn");
+    function scrollFunction() {
+        if (document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
     }
-}
-
-function topFunction() {
-    document.documentElement.scrollTop = 0;
-}
+    window.onscroll = function () {
+        scrollFunction();
+        stick();
+    };
+    function top() {
+        document.documentElement.scrollTop = 0;
+    }
+    let header = document.getElementById("navbar");
+    let sticky = header.offsetTop;
+    function stick() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+    mybutton.addEventListener("click", top);
+});
 
 const formElement = document.getElementById("registration");
-
 formElement.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -91,13 +104,11 @@ formElement.addEventListener("submit", function (event) {
 let password = document.getElementById("password");
 let icon = document.getElementById("icon");
 
-console.log(password.type);
 icon.addEventListener("click", function () {
     if (password.type == "password") {
         password.setAttribute("type", "text");
         icon.classList.remove("fa-eye");
         icon.classList.add("fa-eye-slash");
-        console.log("clc");
     } else {
         password.setAttribute("type", "password");
         icon.classList.remove("fa-eye-slash");
@@ -139,17 +150,3 @@ burger.addEventListener("click", () => {
         navLinks.classList.remove("show");
     });
 });
-
-window.onscroll = function () {
-    stick();
-};
-
-let header = document.getElementById("navbar");
-let sticky = header.offsetTop;
-function stick() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
-    }
-}
