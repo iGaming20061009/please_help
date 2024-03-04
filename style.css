@@ -36,7 +36,7 @@ a {
 p {
     margin: 0;
     padding: 2px;
-    font-size: 20px;
+    font-size: 2vw;
     font-family: Georgia, "Times New Roman", Times, serif;
     color: #fbfeff;
 }
@@ -98,10 +98,10 @@ span {
     background-color: #162938;
 }
 .car-accordion-element.active .car-content {
-    height: 270px;
+    height: 30vw;
 }
 .car-accordion-element.active .car-accordion-title::before {
-    position: relative;
+    position: absolute;
     content: "-";
 }
 
